@@ -70,12 +70,12 @@ function AnimatedHero() {
               </p>
               
               <div className="flex flex-row gap-3 justify-center lg:justify-start mt-4">
-                <Button size="lg" className="gap-4" variant="outline" asChild>
+                <Button size="lg" className="gap-4 hover:scale-110 transition-transform" variant="outline" asChild>
                   <a href="tel:+254708114250">
                     Jump on a call <PhoneCall className="w-4 h-4" />
                   </a>
                 </Button>
-                <Button size="lg" className="gap-4" asChild>
+                <Button size="lg" className="gap-4 hover:scale-110 transition-transform" asChild>
                   <a href="#contact">
                     Get In Touch <MoveRight className="w-4 h-4" />
                   </a>
@@ -85,17 +85,24 @@ function AnimatedHero() {
             
             <div className="flex justify-center lg:justify-end">
               <div className="relative w-full max-w-md">
-                <picture>
-                  <source srcSet="/profile.webp" type="image/webp" />
-                  <img
-                    src="/profile.png"
-                    alt="Winfred Kendi - Early Childhood Education Professional"
-                    width={800}
-                    height={800}
-                    loading="eager"
-                    className="w-full h-auto rounded-2xl shadow-2xl"
-                  />
-                </picture>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <picture>
+                    <source srcSet="/profile.webp" type="image/webp" />
+                    <img
+                      src="/profile.png"
+                      alt="Winfred Kendi - Early Childhood Education Professional"
+                      width={800}
+                      height={800}
+                      loading="eager"
+                      className="w-full h-auto rounded-2xl shadow-2xl"
+                    />
+                  </picture>
+                </motion.div>
               </div>
             </div>
           </div>

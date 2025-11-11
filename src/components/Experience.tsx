@@ -71,6 +71,7 @@ export default function Experience() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={animate.opacity ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
+                whileHover={{ scale: 1.02 }}
               >
                 <Card className="hover:shadow-xl transition-shadow">
                   <CardHeader>

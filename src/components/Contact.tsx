@@ -71,7 +71,7 @@ export default function Contact() {
               >
                 {info.href ? (
                   <a href={info.href} target={info.href.startsWith('http') ? '_blank' : undefined} rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}>
-                    <Card className="h-full hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer">
+                    <Card className="h-full hover:shadow-xl transition-all hover:-translate-y-2 hover:scale-105 cursor-pointer">
                       <CardContent className="pt-6 text-center">
                         <div className={`w-16 h-16 mx-auto rounded-full bg-gradient-to-br ${info.color} flex items-center justify-center text-white mb-4`}>
                           {info.icon}

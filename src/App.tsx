@@ -2,8 +2,10 @@ import { lazy, Suspense } from 'react';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { FloatingShapes } from './components/ui/floating-shapes';
 
 const About = lazy(() => import('./components/About'));
+const Stats = lazy(() => import('./components/Stats'));
 const Experience = lazy(() => import('./components/Experience'));
 const Education = lazy(() => import('./components/Education'));
 const Skills = lazy(() => import('./components/Skills'));
@@ -21,11 +23,13 @@ function App() {
   return (
     <ErrorBoundary>
       <div className="min-h-screen">
+        <FloatingShapes />
         <Navigation />
         <main id="home">
           <Hero />
           <Suspense fallback={<LoadingFallback />}>
             <About />
+            <Stats />
             <Experience />
             <Education />
             <Skills />

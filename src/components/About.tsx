@@ -60,7 +60,7 @@ export default function About() {
           transition={transition}
         >
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            About Me
+            About Me ✨
           </h2>
           <p className="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-3xl mx-auto">
             Specialized in Montessori methods and modern pedagogical approaches with a focus on holistic child development
@@ -107,7 +107,7 @@ export default function About() {
                   animate={animate.opacity ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  <Card className="h-full hover:shadow-lg transition-shadow">
+                  <Card className="h-full hover:shadow-lg hover:scale-105 transition-all duration-300">
                     <CardHeader>
                       <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-4">
                         {point.icon}

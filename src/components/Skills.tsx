@@ -70,7 +70,7 @@ export default function Skills() {
                   animate={animate.opacity ? { opacity: 1, scale: 1 } : {}}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                 >
-                  <Card className="h-full hover:shadow-lg transition-shadow">
+                  <Card className="h-full hover:shadow-lg hover:scale-105 transition-all duration-300">
                     <CardHeader>
                       <CardTitle className="text-lg">{tech.category}</CardTitle>
                     </CardHeader>
@@ -100,7 +100,7 @@ export default function Skills() {
                   animate={animate.opacity ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: index * 0.15 }}
                 >
-                  <Card className="h-full hover:shadow-xl transition-all hover:-translate-y-1">
+                  <Card className="h-full hover:shadow-xl transition-all hover:-translate-y-2 hover:scale-105">
                     <CardHeader>
                       <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${interest.color} flex items-center justify-center text-white mb-4`}>
                         {interest.icon}
