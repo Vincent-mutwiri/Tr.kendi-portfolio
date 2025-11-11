@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { MoveRight, PhoneCall } from "lucide-react";
+import { MoveRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 function AnimatedHero() {
@@ -75,11 +75,6 @@ function AnimatedHero() {
               </p>
               
               <div className="flex flex-row gap-3 justify-center lg:justify-start mt-4">
-                <Button size="lg" className="gap-4 hover:scale-110 transition-transform" variant="outline" asChild>
-                  <a href="tel:+254708114250">
-                    Jump on a call <PhoneCall className="w-4 h-4" />
-                  </a>
-                </Button>
                 <Button size="lg" className="gap-4 hover:scale-110 transition-transform" asChild>
                   <a href="#contact">
                     Get In Touch <MoveRight className="w-4 h-4" />
