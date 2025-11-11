@@ -1,16 +1,14 @@
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { Laptop, Gamepad2, Book, Users } from 'lucide-react';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import type { TechTool, Interest } from '../types';
 
 export default function Skills() {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+  const { ref, initial, animate, transition } = useScrollAnimation();
 
-  const techTools = [
+  const techTools: TechTool[] = [
     { category: 'Learning Management Systems', tools: ['Google Classroom', 'Seesaw', 'ClassDojo'] },
     { category: 'Educational Apps', tools: ['Kahoot!', 'ABCmouse', 'Starfall', 'Epic! Reading'] },
     { category: 'Digital Tools', tools: ['Google Workspace for Education', 'Canva for Education', 'Padlet'] },
@@ -18,7 +16,7 @@ export default function Skills() {
     { category: 'Assessment Tools', tools: ['Boom Cards', 'Quizizz', 'Edpuzzle'] },
   ];
 
-  const interests = [
+  const interests: Interest[] = [
     {
       icon: <Gamepad2 className="w-8 h-8" />,
       title: 'Swimming',
@@ -50,9 +48,9 @@ export default function Skills() {
       <div className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={initial}
+          animate={animate}
+          transition={transition}
         >
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             Skills & Interests
@@ -69,7 +67,7 @@ export default function Skills() {
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, scale: 0.9 }}
-                  animate={inView ? { opacity: 1, scale: 1 } : {}}
+                  animate={animate.opacity ? { opacity: 1, scale: 1 } : {}}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                 >
                   <Card className="h-full hover:shadow-lg transition-shadow">
@@ -99,7 +97,7 @@ export default function Skills() {
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  animate={animate.opacity ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: index * 0.15 }}
                 >
                   <Card className="h-full hover:shadow-xl transition-all hover:-translate-y-1">

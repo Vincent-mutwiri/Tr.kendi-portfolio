@@ -1,14 +1,11 @@
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { BookOpen, Users, Globe, TrendingUp, Heart, Award } from 'lucide-react';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 export default function About() {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+  const { ref, initial, animate, transition } = useScrollAnimation();
 
   const competencies = [
     'Child Development',
@@ -58,9 +55,9 @@ export default function About() {
       <div className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={initial}
+          animate={animate}
+          transition={transition}
         >
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             About Me
@@ -83,7 +80,7 @@ export default function About() {
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, scale: 0.8 }}
-                    animate={inView ? { opacity: 1, scale: 1 } : {}}
+                    animate={animate.opacity ? { opacity: 1, scale: 1 } : {}}
                     transition={{ duration: 0.3, delay: index * 0.05 }}
                   >
                     <Badge variant="secondary" className="text-sm py-2 px-4">
@@ -107,7 +104,7 @@ export default function About() {
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  animate={animate.opacity ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
                   <Card className="h-full hover:shadow-lg transition-shadow">
@@ -129,7 +126,7 @@ export default function About() {
           {/* Quote */}
           <motion.div
             initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
+            animate={animate.opacity ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.8 }}
             className="text-center"
           >

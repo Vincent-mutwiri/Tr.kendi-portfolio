@@ -1,13 +1,10 @@
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from './ui/card';
 import { GraduationCap, Calendar, CheckCircle } from 'lucide-react';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 export default function Education() {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+  const { ref, initial, animate, transition } = useScrollAnimation();
 
   const education = [
     {
@@ -81,9 +78,9 @@ export default function Education() {
       <div className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={initial}
+          animate={animate}
+          transition={transition}
         >
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             Education & Certifications
@@ -98,7 +95,7 @@ export default function Education() {
               <motion.div
                 key={index}
                 initial={{ opacity: 0, x: -20 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
+                animate={animate.opacity ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
               >
                 <Card className="hover:shadow-xl transition-shadow">
@@ -138,7 +135,7 @@ export default function Education() {
           <div className="grid md:grid-cols-2 gap-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              animate={animate.opacity ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
               <Card>
@@ -161,7 +158,7 @@ export default function Education() {
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              animate={animate.opacity ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.8 }}
             >
               <Card>

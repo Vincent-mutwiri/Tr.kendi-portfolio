@@ -1,13 +1,10 @@
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
 import { Card, CardContent } from './ui/card';
 import { Quote } from 'lucide-react';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 export default function Testimonials() {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+  const { ref, initial, animate, transition } = useScrollAnimation();
 
   const testimonials = [
     {
@@ -27,9 +24,9 @@ export default function Testimonials() {
       <div className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={initial}
+          animate={animate}
+          transition={transition}
         >
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             Testimonials
@@ -43,7 +40,7 @@ export default function Testimonials() {
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.9 }}
-                animate={inView ? { opacity: 1, scale: 1 } : {}}
+                animate={animate.opacity ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
               >
                 <Card className="h-full hover:shadow-xl transition-shadow bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 border-none">

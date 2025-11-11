@@ -1,41 +1,44 @@
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
 import { Card, CardContent } from './ui/card';
 import { Button } from './ui/button';
 import { Mail, Phone, Linkedin, MapPin, Send } from 'lucide-react';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import type { ContactInfo } from '../types';
+
+const email = import.meta.env.VITE_CONTACT_EMAIL || 'kendikanya@gmail.com';
+const phone = import.meta.env.VITE_CONTACT_PHONE || '+254 708 114250';
+const linkedinUrl = import.meta.env.VITE_LINKEDIN_URL || 'https://linkedin.com/in/winfredkendi-educator';
+const location = import.meta.env.VITE_LOCATION || 'Nairobi, Kenya';
 
 export default function Contact() {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+  const { ref, initial, animate, transition } = useScrollAnimation();
 
-  const contactInfo = [
+  const contactInfo: ContactInfo[] = [
     {
       icon: <Mail className="w-6 h-6" />,
       label: 'Email',
-      value: 'kendikanya@gmail.com',
-      href: 'mailto:kendikanya@gmail.com',
+      value: email,
+      href: `mailto:${email}`,
       color: 'from-blue-500 to-cyan-500',
     },
     {
       icon: <Phone className="w-6 h-6" />,
       label: 'Phone',
-      value: '+254 708 114250',
-      href: 'tel:+254708114250',
+      value: phone,
+      href: `tel:${phone.replace(/\s/g, '')}`,
       color: 'from-green-500 to-teal-500',
     },
     {
       icon: <Linkedin className="w-6 h-6" />,
       label: 'LinkedIn',
       value: 'winfredkendi-educator',
-      href: 'https://linkedin.com/in/winfredkendi-educator',
+      href: linkedinUrl,
       color: 'from-blue-600 to-blue-800',
     },
     {
       icon: <MapPin className="w-6 h-6" />,
       label: 'Location',
-      value: 'Nairobi, Kenya',
+      value: location,
       href: null,
       color: 'from-red-500 to-orange-500',
     },
@@ -46,9 +49,9 @@ export default function Contact() {
       <div className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={initial}
+          animate={animate}
+          transition={transition}
         >
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             Get In Touch
@@ -63,7 +66,7 @@ export default function Contact() {
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
+                animate={animate.opacity ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
                 {info.href ? (
@@ -103,7 +106,7 @@ export default function Contact() {
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
+            animate={animate.opacity ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-center"
           >
@@ -118,7 +121,7 @@ export default function Contact() {
                   size="lg"
                   variant="secondary"
                   className="gap-2"
-                  onClick={() => window.location.href = 'mailto:kendikanya@gmail.com'}
+                  onClick={() => window.location.href = `mailto:${email}`}
                 >
                   <Send className="w-5 h-5" />
                   Send Me an Email

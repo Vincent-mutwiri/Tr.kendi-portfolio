@@ -1,11 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { Button } from './ui/button';
+import { NAV_ITEMS } from '../constants/navigation';
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,15 +18,11 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navItems = [
-    { label: 'Home', href: '#home' },
-    { label: 'About', href: '#about' },
-    { label: 'Experience', href: '#experience' },
-    { label: 'Education', href: '#education' },
-    { label: 'Skills', href: '#skills' },
-    { label: 'Testimonials', href: '#testimonials' },
-    { label: 'Contact', href: '#contact' },
-  ];
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      mobileMenuRef.current?.querySelector('button')?.focus();
+    }
+  }, [isMobileMenuOpen]);
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
@@ -34,6 +32,13 @@ export default function Navigation() {
     } else if (href === '#home') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       setIsMobileMenuOpen(false);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent, href: string) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      scrollToSection(href);
     }
   };
 
@@ -59,6 +64,8 @@ export default function Navigation() {
             >
               <button
                 onClick={() => scrollToSection('#home')}
+                onKeyDown={(e) => handleKeyDown(e, '#home')}
+                aria-label="Navigate to home section"
                 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
               >
                 WK
@@ -67,20 +74,22 @@ export default function Navigation() {
 
             {/* Desktop Navigation */}
             <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-4">
-                {navItems.map((item, index) => (
+              <nav className="ml-10 flex items-baseline space-x-4" aria-label="Main navigation">
+                {NAV_ITEMS.map((item, index) => (
                   <motion.button
                     key={item.label}
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.1 * index }}
                     onClick={() => scrollToSection(item.href)}
+                    onKeyDown={(e) => handleKeyDown(e, item.href)}
+                    aria-label={`Navigate to ${item.label.toLowerCase()} section`}
                     className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors"
                   >
                     {item.label}
                   </motion.button>
                 ))}
-              </div>
+              </nav>
             </div>
 
             {/* Mobile menu button */}
@@ -89,6 +98,8 @@ export default function Navigation() {
                 variant="ghost"
                 size="icon"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+                aria-expanded={isMobileMenuOpen}
               >
                 {isMobileMenuOpen ? (
                   <X className="h-6 w-6" />
@@ -103,22 +114,25 @@ export default function Navigation() {
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
           <motion.div
+            ref={mobileMenuRef}
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800"
           >
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              {navItems.map((item) => (
+            <nav className="px-2 pt-2 pb-3 space-y-1 sm:px-3" aria-label="Mobile navigation">
+              {NAV_ITEMS.map((item) => (
                 <button
                   key={item.label}
                   onClick={() => scrollToSection(item.href)}
+                  onKeyDown={(e) => handleKeyDown(e, item.href)}
+                  aria-label={`Navigate to ${item.label.toLowerCase()} section`}
                   className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 block px-3 py-2 rounded-md text-base font-medium w-full text-left transition-colors"
                 >
                   {item.label}
                 </button>
               ))}
-            </div>
+            </nav>
           </motion.div>
         )}
       </motion.nav>

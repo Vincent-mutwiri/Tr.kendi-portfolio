@@ -1,5 +1,4 @@
 import { HeroSection } from './ui/hero-section';
-import { Icons } from './ui/icons';
 import { Mail, Linkedin } from 'lucide-react';
 
 export default function Hero() {
@@ -29,8 +28,8 @@ export default function Hero() {
         },
       ]}
       image={{
-        src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1248&h=765&fit=crop&q=80",
-        alt: "Early Childhood Education - Children learning in a classroom",
+        src: "/profile.png",
+        alt: "Winfred Kendi - Early Childhood Education Professional",
       }}
     />
   );
