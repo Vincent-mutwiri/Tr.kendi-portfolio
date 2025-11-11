@@ -86,13 +86,17 @@ export function HeroSection({
               size="small"
             >
               <Mockup type="responsive">
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  width={1248}
-                  height={765}
-                  className="w-full h-auto"
-                />
+                <picture>
+                  <source srcSet={image.src.replace('.png', '.webp')} type="image/webp" />
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    width={800}
+                    height={800}
+                    loading="eager"
+                    className="w-full h-auto"
+                  />
+                </picture>
               </Mockup>
             </MockupFrame>
             <Glow
