@@ -6,6 +6,8 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preload" as="image" href="/profile.webp" />
     <meta name="description" content="Winfred Kendi - Global-Minded Teaching Professional specializing in early childhood education, Montessori methodology, and international curricula." />
     <meta name="keywords" content="educator, teacher, early childhood education, Montessori, international curriculum, Kenya" />
     <meta name="author" content="Winfred Kendi" />
@@ -21,6 +23,11 @@
     <meta name="twitter:image" content="/profile.png" />
     
     <title>Winfred Kendi - Global-Minded Teaching Professional</title>
+    <script>
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark')
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -25,10 +25,15 @@ function AnimatedHero() {
     <div className="w-full">
       <div className="container mx-auto px-4">
         <div className="flex gap-8 py-20 lg:py-40 items-center justify-center flex-col">
-          <div>
+          <div className="flex gap-3">
             <Button variant="secondary" size="sm" className="gap-4" asChild>
               <a href="#education">
                 View Credentials <MoveRight className="w-4 h-4" />
+              </a>
+            </Button>
+            <Button variant="outline" size="sm" className="gap-4" asChild>
+              <a href="/resume.pdf" download>
+                Download CV <MoveRight className="w-4 h-4" />
               </a>
             </Button>
           </div>

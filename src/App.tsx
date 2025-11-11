@@ -3,6 +3,7 @@ import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { FloatingShapes } from './components/ui/floating-shapes';
+import ScrollToTop from './components/ScrollToTop';
 
 const About = lazy(() => import('./components/About'));
 const Stats = lazy(() => import('./components/Stats'));
@@ -40,6 +41,7 @@ function App() {
         <Suspense fallback={null}>
           <Footer />
         </Suspense>
+        <ScrollToTop />
       </div>
     </ErrorBoundary>
   );

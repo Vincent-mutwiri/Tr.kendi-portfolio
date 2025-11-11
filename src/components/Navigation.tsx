@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { Button } from './ui/button';
 import { NAV_ITEMS } from '../constants/navigation';
+import DarkModeToggle from './DarkModeToggle';
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -92,8 +93,14 @@ export default function Navigation() {
               </nav>
             </div>
 
+            {/* Dark mode toggle */}
+            <div className="hidden md:block">
+              <DarkModeToggle />
+            </div>
+
             {/* Mobile menu button */}
-            <div className="md:hidden">
+            <div className="md:hidden flex items-center gap-2">
+              <DarkModeToggle />
               <Button
                 variant="ghost"
                 size="icon"
